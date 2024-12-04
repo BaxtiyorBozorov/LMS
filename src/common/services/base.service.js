@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { CommonException } from "../exeption/index.js";
+import {HttpErrorCodes} from "../exeption/error.code.js";
 
 
 
@@ -63,6 +64,14 @@ export const BaseService = class BaseService {
     }
 
     async findById(id, options = {}){
+        id = new Types.ObjectId(id)
+        const doc = await this.model.findOne({_id:id , deletedAt:0}, options)
+        if(!doc) return false
+        return doc
+
+    }
+
+    async findWithId(id, options = {}){
         id = new Types.ObjectId(id)
         const doc = await this.model.findById(id, options)
         if(!doc || doc.deletedAt) throw new Error('document not found')
