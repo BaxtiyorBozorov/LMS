@@ -13,6 +13,8 @@ export const ENV = {
     // STUDENT_PORT: env.STUDENT_PORT || 7000,
     DB_URL: env.DB_URL || 'mongodb://localhost:27017/LMS',
     UNIVERSAL_PASSWORD: env.UNIVERSAL_PASSWORD || "universal-password",
-    TOKEN_SECRET_KEY: env.TOKEN_SECRET_KEY || "token-secret-key"
+    TOKEN_SECRET_KEY: env.TOKEN_SECRET_KEY || "token-secret-key",
+    EMAIL: env.EMAIL || "baxtiyorbozorov226@gmail.com",
+    EMAIL_PASSWROD: env.EMAIL_PASSWROD || "ysndzpwpsvkorzon"
 
 }
