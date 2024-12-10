@@ -9,4 +9,4 @@ export const connectDB = async function () {
         console.log(error);
         
     }
-}
+} 

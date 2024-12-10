@@ -1,5 +1,5 @@
-import { profilModel } from "../../db/models/profils/profil.model.js";
-import { BaseService } from "../base.service.js";
+import { profilModel } from "../db/models/profil.model.js";
+import { BaseService } from "./base.service.js";
 
 class ProfilService extends BaseService{
     project = {

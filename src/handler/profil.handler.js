@@ -1,6 +1,6 @@
 import { CommonException } from "../common/exeption/index.js";
-import profilService from "../common/services/profils/profil.service.js";
-import userService from "../common/services/user/user.service.js";
+import profilService from "../common/services/profil.service.js";
+import userService from "../common/services/user.service.js";
 import { dateParser } from "../common/utils/date.parser.js";
 import { sendError } from "../common/utils/send.Error.js";
 
@@ -64,7 +64,7 @@ export async function updateProfilHandler(request , response) {
     try {
         const data = request.body
         const profil = await profilService.getById(data._id)
-        if(!profil) response.json(CommonException.NotFound(data._id))
+        if(!profil) response.json(CommonException.NotFound("Profil not found"))
         data.birthDate = dateParser(data.birthDate)
         await profilService.updateOne(data._id , data)
         response.json(CommonException.Success())

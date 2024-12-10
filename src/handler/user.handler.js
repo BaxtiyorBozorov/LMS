@@ -1,5 +1,5 @@
 import md5 from "md5";
-import userService from "../common/services/user/user.service.js";
+import userService from "../common/services/user.service.js";
 import {sendError} from "../common/utils/send.Error.js";
 import {CommonException} from "../common/exeption/index.js";
 

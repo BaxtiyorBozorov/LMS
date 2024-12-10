@@ -1,11 +1,11 @@
 import md5 from "md5";
 import jwt from "jsonwebtoken"
 import {CommonException} from "../common/exeption/index.js";
-import profilService from "../common/services/profils/profil.service.js";
-import userService from "../common/services/user/user.service.js";
+import profilService from "../common/services/profil.service.js";
+import userService from "../common/services/user.service.js";
 import {ENV} from "../common/config.js";
 import {otpGenerator} from "../common/utils/otp.generator.js";
-import otpService from "../common/services/otp/otp.service.js";
+import otpService from "../common/services/otp.service.js";
 import {sendEmail} from "../common/utils/otp.sender.js";
 
 
@@ -97,7 +97,7 @@ export async function resetPasswordHandler(request , response) {
         const {password} = request.body
         const user = request.user
         await userService.updateOne(user._id , {password:md5(password)})
-        return response.json(CommonException.Success())
+        return response.json(CommonException.Success("Password updated successfully"))
     } catch (error) {
         console.log(error);
         

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { COLLECTIONS } from "../../../constants/collections.js";
+import { COLLECTIONS } from "../../constants/collections.js";
 
 const ProfilSchema = new mongoose.Schema({
     userId : {

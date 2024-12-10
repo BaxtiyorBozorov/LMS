@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { COLLECTIONS } from "../../../constants/collections.js";
+import { COLLECTIONS } from "../../constants/collections.js";
 
 const paymetSchema = Schema({
     studentId:{

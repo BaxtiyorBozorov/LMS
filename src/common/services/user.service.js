@@ -1,8 +1,7 @@
 import {Types} from "mongoose";
-import { UserModel } from "../../db/models/user.model/user.model.js";
-import { BaseService } from "../base.service.js";
-import {CommonException} from "../../exeption/index.js";
 
+import { BaseService } from "./base.service.js";
+import { UserModel } from "../db/models/user.model.js";
 class UserService extends BaseService{
     project={
         email:1,
