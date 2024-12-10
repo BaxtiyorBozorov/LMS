@@ -6,11 +6,14 @@ import {CommonException} from "../common/exeption/index.js";
 export async function createUserHandler(request,response) {
     try {
         const data = request.body
+        //check email exists
         const isValidEmail = await userService.findByQuery({email:data.email})
-        // console.log(isValidEmail.length);
         if(isValidEmail.length) return response.json(CommonException.BadRequest("This email is already in use."))
+        //hash password
         data.password = md5(data.password)
+        //create user
         const result = await userService.create(data)
+        //return result
         return response.json(CommonException.Success(result))
     } catch (error) {
         sendError(response,error)
@@ -20,11 +23,12 @@ export async function createUserHandler(request,response) {
 
 export async function getAllUserHandler(request,response) {
     try {
+        //find all users
         const pipeline = [
             {$project: {email: 1,role: 1}}
         ]
         const data = await userService.aggregate({},pipeline)      // aggregatsiya orqali
-        // console.log(data);
+        //return result
         return response.json(CommonException.Success(data))
 
 
@@ -61,7 +65,9 @@ export async function getUserByIdHandler(request,response) {
 export async function deleteUserByIdHandler(request,response) {
     try {
         const {_id} = request.params
+        //find user
         const user = await userService.findById(_id)
+        //check user exists
         if(!user) return response.json(CommonException.NotFound(_id))
 
         await userService.deleteOne(_id)
@@ -76,14 +82,26 @@ export async function deleteUserByIdHandler(request,response) {
 export async function updateUserHandler(request , response){
     try {
         const data = request.body
-        const user = await userService.findWithId(data._id)
+        //find user
+        const user = await userService.findById(data._id)
+        //check user exists
+        if(!user) return response.json(CommonException.NotFound(data._id))
+        //update user
         await userService.updateOne(data._id , data)
-        response.json({
-            message:"OK"
-        })
-
+        //return result
+        return response.json(CommonException.Success())
     } catch (error) {
         console.log(error);
+        return response.status(400).json(CommonException.Unknown(error.message))
+    }
+}
+
+export const getUsersByTypeHandler = async (request , response) => {
+    try {
+        const {type} = request.params
+        const data = await userService.getByType(type)
+        return response.json(CommonException.Success(data))
+    } catch (error) {
         return response.status(400).json(CommonException.Unknown(error.message))
     }
 }

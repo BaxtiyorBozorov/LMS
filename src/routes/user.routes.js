@@ -1,5 +1,11 @@
 import express from "express"
-import { createUserHandler, deleteUserByIdHandler, getAllUserHandler, getUserByIdHandler, updateUserHandler } from "../handler/user.handler.js"
+import { createUserHandler, 
+    deleteUserByIdHandler, 
+    getAllUserHandler, 
+    getUserByIdHandler, 
+    getUsersByTypeHandler, 
+    updateUserHandler 
+} from "../handler/user.handler.js"
 import { validateIt } from "../common/middleware/validate.js"
 import { UserSchemas } from "../common/joi-schemas/user.scema.js"
 import { baseSchemas } from "../common/joi-schemas/base.schema.js"
@@ -15,4 +21,5 @@ routes.route("/" )
 
 routes.get("/:_id" , authorization , checkRole('admin'),validateIt(baseSchemas.byId , 'params'), getUserByIdHandler)
 routes.delete("/:_id",authorization,checkRole('admin'), validateIt(baseSchemas.byId , 'params') , deleteUserByIdHandler) 
+routes.get("/type/:type" , authorization , checkRole('admin'),validateIt(UserSchemas.byType , 'params'),getUsersByTypeHandler)
 export default routes

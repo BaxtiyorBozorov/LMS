@@ -26,6 +26,11 @@ export const UserSchemas = {
                     .min(6)
                     .max(30)
                   
+        }),
+        byType: Joi.object({
+            type: Joi.string()
+                    .valid("admin", 'student', "teacher")
+                    .required()
         })
     
     }

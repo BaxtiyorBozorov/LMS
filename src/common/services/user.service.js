@@ -14,6 +14,9 @@ class UserService extends BaseService{
         return await this.findById(id, {...this.project, ...options})
     }
     
+    async getByType(type , options = {}){
+        return await this.findByQuery({role:type} , {...this.project, ...options})
+    }
 }
 
 export default new UserService(UserModel)
