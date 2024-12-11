@@ -15,8 +15,12 @@ const courseSchema = new mongoose.Schema({
     price: {
         type : Number
     },
-    duration: {
-        type : String
+    completed:{
+        type: Boolean,
+        default: false
+    },
+    startDate: {
+        type: Date
     },
     createdAt: {
         type: mongoose.SchemaTypes.Mixed,

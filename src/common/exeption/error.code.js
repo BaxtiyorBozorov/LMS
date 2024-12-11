@@ -5,7 +5,12 @@ export const HttpErrorCodes = {
     Forbidden: 403,
     NotFound: 404,
     TooMany: 429,
-    ServerError: 500
+    ServerError: 500,
+    InternalServerError: 501,
+    Forbidden: 403,
+    BadGateway: 502,
+    ServiceUnavailable: 503,
+    GatewayTimeout: 504
 }
 
 export const CommonErrorCodes = {

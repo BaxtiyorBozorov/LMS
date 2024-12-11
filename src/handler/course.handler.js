@@ -1,6 +1,7 @@
 import { courseService } from "../common/services/course.service.js"
 import { CommonException } from "../common/exeption/index.js"
 import userService from "../common/services/user.service.js"
+import { dateParser } from "../common/utils/date.parser.js"
 
 
 export const createCourseHandler = async (req, res) => {
@@ -8,6 +9,7 @@ export const createCourseHandler = async (req, res) => {
         const data = req.body
         const teacher = await userService.findById(data.teacherId)
         if(!teacher || teacher.role !== "teacher") return res.status(404).json(CommonException.NotFound("Teacher not found"))
+        data.startDate = dateParser(data.startDate)
         const course = await courseService.create(data)
         return res.status(201).json(CommonException.Success(course))
     } catch (error) {

@@ -3,7 +3,7 @@ export const COLLECTIONS = {
     PROFIL: "profils",
     TASK:"tasks",
     COURSES: "courses",
-    PATOK: "patoks",
+    GROUP : "groups",
     PAYMENTS: "payments",
     MESSAGES: "messages",
     TASKS: "tasks",

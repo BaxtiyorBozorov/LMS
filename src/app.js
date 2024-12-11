@@ -8,6 +8,7 @@ import profilRoutes from './routes/profil.routes.js'
 import signRoutes from './routes/sign.routes.js'
 import roleRoutes from './routes/role.routes.js'
 import courseRoutes from './routes/course.routes.js'
+import groupRoutes from './routes/group.routes.js'
 
 const app = express()
 
@@ -19,6 +20,7 @@ async function start (){
     app.use('/sign' , signRoutes)
     app.use('/admin/role' , roleRoutes)
     app.use('/admin/course' , courseRoutes)
+    app.use('/admin/group' , groupRoutes)
     console.log(`adimin server is running on http://${ENV.HOST}:${ENV.ADMIN_PORT}`);
     
 }
