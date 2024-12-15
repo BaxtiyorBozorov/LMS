@@ -27,6 +27,16 @@ export const BaseService = class BaseService {
         }
     }
 
+    async softUpdateOne(id , data){
+        try {
+            id = new Types.ObjectId(id)
+            return await this.model.updateOne({_id: id}, data)
+        } catch (error) {
+            console.log(error.message);
+            
+        }
+    }
+
     async updateMany(query, data){
         try {
             data.updatedAt = new Date()
@@ -104,8 +114,7 @@ export const BaseService = class BaseService {
 
         } catch (error) {
             console.log(error);
-            
-            throw CommonException.Unknown(error)
+            throw CommonException.Unknown(error.message)
         }
     }
 
@@ -161,4 +170,12 @@ export const BaseService = class BaseService {
             throw error;
         }
     }
+    async populate(query, path, select, model){
+        return await this.model.find(query).populate({
+            path: path,
+            select: select,
+            model: model
+        }).exec()
+    }
+
 }

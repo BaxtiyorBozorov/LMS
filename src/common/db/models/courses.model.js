@@ -8,10 +8,6 @@ const courseSchema = new mongoose.Schema({
     discription: {
         type : String
     },
-    teacherId: {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref: COLLECTIONS.USER
-    },
     price: {
         type : Number
     },

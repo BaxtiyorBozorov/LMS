@@ -16,6 +16,10 @@ const roleSchema = new mongoose.Schema({
     deleteUser:{
         type:Boolean ,
         default: false
+    } ,
+    getUser:{
+        type:Boolean ,
+        default: false
     } , 
     //role
     addRole:{
@@ -29,17 +33,25 @@ const roleSchema = new mongoose.Schema({
     deleteRole:{
         type:Boolean ,
         default: false
+    },
+    getRole:{
+        type:Boolean ,
+        default: false
     } ,
-    //profil
-    addProfil:{
+    //group
+    addGroup:{
         type:Boolean,
         default:false
-    } , 
-    updateProfil:{
+    },
+    updateGroup:{
         type:Boolean,
         default:false
-    } , 
-    deleteProfil:{
+    },  
+    deleteGroup:{
+        type:Boolean,
+        default:false
+    },
+    getGroup:{
         type:Boolean,
         default:false
     },
@@ -53,6 +65,10 @@ const roleSchema = new mongoose.Schema({
         default:false
     },
     deleteCourse:{
+        type:Boolean,
+        default:false
+    },
+    getCourse:{
         type:Boolean,
         default:false
     },

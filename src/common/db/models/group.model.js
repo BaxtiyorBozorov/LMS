@@ -11,10 +11,6 @@ const groupSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: COLLECTIONS.USER   
     },
-    students: [{
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: COLLECTIONS.USER
-    }],
     createdAt: {
         type: mongoose.SchemaTypes.Mixed,
         default:0

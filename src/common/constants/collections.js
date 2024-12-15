@@ -9,6 +9,7 @@ export const COLLECTIONS = {
     TASKS: "tasks",
     ENTROLLMENTS:"entrollments",
     SMS_MESSAGES: "sms_messges",
-    OTP: "otps"
+    OTP: "otps",
+    ROLE: "roles",
 
 }

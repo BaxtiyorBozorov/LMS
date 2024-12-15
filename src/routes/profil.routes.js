@@ -9,11 +9,11 @@ import {checkRole} from "../common/middleware/auth-role.js";
 const routes = Router()
 
 routes.route("/")
-        .post(authorization,checkRole("admin"),validateIt(ProfilSchemas.createProfil ) , createProfilHandler)
-        .get(authorization , checkRole('admin'),getAllProfilsHandler)
-        .put(authorization , checkRole('admin') , validateIt(ProfilSchemas.updateProfil) , updateProfilHandler)
+        .post(authorization,checkRole,validateIt(ProfilSchemas.createProfil ) , createProfilHandler)
+        .get(authorization , checkRole,getAllProfilsHandler)
+        .put(authorization , checkRole, validateIt(ProfilSchemas.updateProfil) , updateProfilHandler)
 
-routes.get("/:_id" ,authorization , checkRole('admin'),validateIt(baseSchemas.byId , 'params'), getProfilByIdHandler)
-routes.delete("/:_id" ,authorization,checkRole('admin') , validateIt(baseSchemas.byId , 'params' ), deleteProfilHandler)
+routes.get("/:_id" ,authorization , checkRole,validateIt(baseSchemas.byId , 'params'), getProfilByIdHandler)
+routes.delete("/:_id" ,authorization,checkRole , validateIt(baseSchemas.byId , 'params' ), deleteProfilHandler)
 
 export default routes

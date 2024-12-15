@@ -7,10 +7,14 @@ import { baseSchemas } from "../common/joi-schemas/base.schema.js"
 
 const router = Router()
 
-router.post("/" , authorization,validateIt(roleSchemas.createRole) , createRoleHandler)
-router.get("/" , authorization,getRoleHandler)
-router.put("/" , authorization, validateIt(roleSchemas.updateRole) , updateRoleHandler)
-router.delete("/:_id" , authorization , validateIt(baseSchemas.byId , 'params'), deleteRoleHandler)
-router.post("/add-role-to-user/" , authorization, addRoleToUserHandler)
+// router.use(authorization)
+// router.use(checkRole)
+
+
+router.post("/" , validateIt(roleSchemas.createRole) , createRoleHandler)
+router.get("/" , getRoleHandler)
+router.put("/" , validateIt(roleSchemas.updateRole) , updateRoleHandler)
+router.delete("/:_id" , validateIt(baseSchemas.byId , 'params'), deleteRoleHandler)
+router.post("/add-role-to-user/" , addRoleToUserHandler)
 
 export default router

@@ -13,13 +13,15 @@ import {authorization} from "../common/middleware/auth.js"
 import {checkRole} from "../common/middleware/auth-role.js"
 
 const routes = express.Router()
+// routes.use(authorization)
+// routes.use(checkRole)
 
 routes.route("/" )
-    .post(authorization,checkRole("admin"),validateIt(UserSchemas.createUser) , createUserHandler)
-    .get(authorization,checkRole("admin"),getAllUserHandler)
-    .put(authorization , checkRole("admin"),validateIt(UserSchemas.updateUser),updateUserHandler)
+    .post(validateIt(UserSchemas.createUser) , createUserHandler)
+    .get(getAllUserHandler)
+    .put(validateIt(UserSchemas.updateUser),updateUserHandler)
 
-routes.get("/:_id" , authorization , checkRole('admin'),validateIt(baseSchemas.byId , 'params'), getUserByIdHandler)
-routes.delete("/:_id",authorization,checkRole('admin'), validateIt(baseSchemas.byId , 'params') , deleteUserByIdHandler) 
-routes.get("/type/:type" , authorization , checkRole('admin'),validateIt(UserSchemas.byType , 'params'),getUsersByTypeHandler)
+routes.get("/:_id" , validateIt(baseSchemas.byId , 'params'), getUserByIdHandler)
+routes.delete("/:_id", validateIt(baseSchemas.byId , 'params') , deleteUserByIdHandler) 
+routes.get("/type/:type" , validateIt(UserSchemas.byType , 'params'),getUsersByTypeHandler)
 export default routes

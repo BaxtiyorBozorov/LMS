@@ -7,5 +7,8 @@ export const baseSchemas = {
     login:Joi.object({
         login:Joi.string().required(),
         password:Joi.string().required()
+    }),
+    groupId:Joi.object({
+        groupId:Joi.string().hex().length(24).required()
     })
 }

@@ -7,6 +7,8 @@ import {ENV} from "../common/config.js";
 import {otpGenerator} from "../common/utils/otp.generator.js";
 import otpService from "../common/services/otp.service.js";
 import {sendEmail} from "../common/utils/otp.sender.js";
+import { HttpErrorCodes } from "../common/exeption/error.code.js";
+import roleService from "../common/services/role.service.js";
 
 
 
@@ -15,22 +17,18 @@ export async function loginHandler(request , response) {
     try {
         const data = request.body
         
-        const user = await userService.findOne({email:data.login} , {_id:1,email:1 , password:1 , role:1}) // find user 
+        const user = await userService.findOne({userName:data.login} ) // find user 
         
         if(!user) return response.json(CommonException.NotFound("user not found"))
 
-        if(md5(data.password )!== user.password) return response.json(CommonException.IncorrectPassword()) // tekshirish
+        if(md5(data.password )!== user.password) return response.status(HttpErrorCodes.Unauthorized).json(CommonException.IncorrectPassword()) // tekshirish
+        const role = await roleService.findById(user.role)
 
-        const profil = await profilService.findOne({userId:user._id} , {deletedAt:0 , createdAt:0 , updatedAt:0}) // profil find
-        if(!profil) return response.json(CommonException.NotFound("Profil not found"))
+        const token = jwt.sign({userId:user._id , type : role.name }, ENV.TOKEN_SECRET_KEY , ) //create token
 
-        const token = jwt.sign({type: user.role , profilId: profil.id  , userId : user._id}, ENV.TOKEN_SECRET_KEY ) //create token
-
+        console.log(token);
         
-        return response.json({
-            message: "OK" , 
-            token
-        })
+        return response.status(HttpErrorCodes.Success).json(CommonException.Success(token))
         
     } catch (error) {
         console.log(error);

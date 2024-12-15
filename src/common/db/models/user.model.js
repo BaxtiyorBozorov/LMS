@@ -2,41 +2,53 @@ import mongoose from "mongoose";
 import { COLLECTIONS } from "../../constants/collections.js";
 
 const UserSchema = new mongoose.Schema({
-    // fullName: {
-    //     type : String
-    // },
-    // age: {
-    //     type: Number
-    // },
-    // phoneNumber:{
-    //     type: String
-    // },
-    // parentsNumber:{
-    //     type: String,
-    //     default:null
-    // },
-    // address: {
-    //     country: { type: String, default: "O'zbekiston" }, // Mamlakat
-    //     city: { type: String , default: null },           // Shahar
-    //     district: { type: String, default: null },        // Tuman
-    //     street: { type: String, default: null },          // Ko‘cha
-    //     // postalCode: { type: String, default: null }       // Pochta indeksi
-    //   },
-
-    email: {
+    fullName:{
+        type:String
+    },
+    userName:{
+        type:String,
+        unique:true
+    },
+    phoneNumber:{
         type: String,
-        required: true,
-        unique: true
+        unique:true
     },
     password: {
         type: String
     },
-    role: {
-        type: String,
-        enum: ["admin","student","teacher"],
-        default: "student"
+    birthDate: {
+        type: mongoose.SchemaTypes.Date
     },
-
+    parentsNumber:{
+        type: mongoose.SchemaTypes.Mixed,
+        unique:true,
+        default:null
+    },
+    paretnsName:{
+        type:mongoose.SchemaTypes.Mixed,
+        default:null
+    },
+    balans:{
+        type:Number,
+        default:0
+    },
+    roleId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: COLLECTIONS.ROLE
+    },
+    groupId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: COLLECTIONS.GROUP,
+        default:null
+    },
+    photoUrl: {
+        type: String,
+        default : null
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     createdAt: {
         type: mongoose.SchemaTypes.Mixed,
         default: 0

@@ -14,7 +14,11 @@ export const roleSchemas = {
         deleteProfil:Joi.boolean(),
         addCourse:Joi.boolean(),
         updateCourse:Joi.boolean(),
-        deleteCourse:Joi.boolean()
+        deleteCourse:Joi.boolean(),
+        getCourse:Joi.boolean(),
+        getGroup:Joi.boolean(),
+        getUser:Joi.boolean(),
+        getRole:Joi.boolean(),
     }),
     updateRole: Joi.object({
         _id: Joi.string().required(),
@@ -30,6 +34,10 @@ export const roleSchemas = {
         deleteProfil:Joi.boolean(),
         addCourse:Joi.boolean(),
         updateCourse:Joi.boolean(),
-        deleteCourse:Joi.boolean()
+        deleteCourse:Joi.boolean(),
+        getCourse:Joi.boolean(),
+        getGroup:Joi.boolean(),
+        getUser:Joi.boolean(),
+        getRole:Joi.boolean(),
     })
 }

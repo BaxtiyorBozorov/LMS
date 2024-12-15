@@ -27,3 +27,14 @@ export const groupSchema = {
                     .length(24))
     })
 }
+
+export const addStudentToGroupSchema = Joi.object({
+    groupId:Joi.string()
+                .hex()
+                .length(24)
+                .required(),
+    studentId:Joi.string()
+                .hex()
+                .length(24)
+                .required()
+})

@@ -2,21 +2,28 @@ import md5 from "md5";
 import userService from "../common/services/user.service.js";
 import {sendError} from "../common/utils/send.Error.js";
 import {CommonException} from "../common/exeption/index.js";
+import { dateParser } from "../common/utils/date.parser.js";
 
 export async function createUserHandler(request,response) {
     try {
         const data = request.body
-        //check email exists
-        const isValidEmail = await userService.findByQuery({email:data.email})
-        if(isValidEmail.length) return response.json(CommonException.BadRequest("This email is already in use."))
-        //hash password
+        const isValidUserName = await userService.findByQuery({userName:data.userName})
+        if(isValidUserName.length) return response.status(404).json(CommonException.BadRequest("This user name is already in use."))
+        const isValidPhoneNumber = await userService.findByQuery({phoneNumber:data.phoneNumber})
+        if(isValidPhoneNumber.length) return response.status(404).json(CommonException.BadRequest("This phone number is already in use."))
+        if(data.parentsNumber) {
+            const isValidParentsNumber = await userService.findByQuery({parentsNumber:data.parentsNumber})
+            if(isValidParentsNumber.length) return response.status(404).json(CommonException.BadRequest("This parents number is already in use."))
+        }
         data.password = md5(data.password)
-        //create user
+        data.birthDate = dateParser(data.birthDate)
+
         const result = await userService.create(data)
-        //return result
-        return response.json(CommonException.Success(result))
+        return response.status(201).json(CommonException.Success(result))
+
     } catch (error) {
-        sendError(response,error)
+        console.log(error);
+        return response.status(400).json(CommonException.Unknown(error.message))
     }
 
 }
@@ -24,11 +31,12 @@ export async function createUserHandler(request,response) {
 export async function getAllUserHandler(request,response) {
     try {
         //find all users
-        const pipeline = [
-            {$project: {email: 1,role: 1}}
-        ]
-        const data = await userService.aggregate({},pipeline)      // aggregatsiya orqali
+        // const pipeline = [
+        //     {$project: {fullName: 1,role: 1}}
+        // ]
+        // const data = await userService.aggregate({},pipeline)      // aggregatsiya orqali
         //return result
+        const data = await userService.getAll({})
         return response.json(CommonException.Success(data))
 
 

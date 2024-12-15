@@ -4,8 +4,11 @@ import { BaseService } from "./base.service.js";
 import { UserModel } from "../db/models/user.model.js";
 class UserService extends BaseService{
     project={
-        email:1,
-        role:1
+        role:1,
+        fullName:1,
+        birthDate:1,
+        phoneNumber:1,
+        
     }
     async getAll(options = {}){
         return await this.findByQuery({} , {...options , ...this.project})
@@ -16,6 +19,9 @@ class UserService extends BaseService{
     
     async getByType(type , options = {}){
         return await this.findByQuery({role:type} , {...this.project, ...options})
+    }
+    async find(query , options = {}){
+        return await this.findByQuery(query , {...this.project, ...options})
     }
 }
 
