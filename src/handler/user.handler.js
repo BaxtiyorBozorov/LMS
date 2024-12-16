@@ -3,7 +3,7 @@ import userService from "../common/services/user.service.js";
 import {sendError} from "../common/utils/send.Error.js";
 import {CommonException} from "../common/exeption/index.js";
 import { dateParser } from "../common/utils/date.parser.js";
-
+import roleService from "../common/services/role.service.js";
 export async function createUserHandler(request,response) {
     try {
         const data = request.body
@@ -35,6 +35,7 @@ export async function getAllUserHandler(request,response) {
         //     {$project: {fullName: 1,role: 1}}
         // ]
         // const data = await userService.aggregate({},pipeline)      // aggregatsiya orqali
+        
         //return result
         const data = await userService.getAll({})
         return response.json(CommonException.Success(data))
@@ -107,7 +108,10 @@ export async function updateUserHandler(request , response){
 export const getUsersByTypeHandler = async (request , response) => {
     try {
         const {type} = request.params
-        const data = await userService.getByType(type)
+        const role = await roleService.findByQuery({name:type})
+        if(!role.length) return response.status(404).json(CommonException.NotFound(type))
+        const data = await userService.findByQuery({roleId:role[0]._id} , {fullName:1 , phoneNumber:1  })
+        if(!data.length) return response.status(404).json(CommonException.NotFound(type))
         return response.json(CommonException.Success(data))
     } catch (error) {
         return response.status(400).json(CommonException.Unknown(error.message))

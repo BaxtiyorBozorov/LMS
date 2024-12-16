@@ -8,8 +8,9 @@ export const groupSchema = {
                     .hex()
                     .length(24)
                     .required(),
-        students:Joi.array()
-                    .items(Joi.string().hex().length(24))
+        courseId:Joi.string()
+                    .hex()
+                    .length(24)
                     .required()
     }),
     update:Joi.object({
@@ -21,10 +22,9 @@ export const groupSchema = {
         teacherId:Joi.string()
                     .hex()
                     .length(24),
-        students:Joi.array()
-                    .items(Joi.string()
+        courseId:Joi.string()
                     .hex()
-                    .length(24))
+                    .length(24)
     })
 }
 

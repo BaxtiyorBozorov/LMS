@@ -26,6 +26,9 @@ const URL_ACCESS = {
         "/admin/user" : "getUser",
         "/admin/group" : "getGroup",
         "/admin/course" : "getCourse",
+    },
+    PATCH: {
+        "/admin/group" : "updateUser",
     }
 }
 
@@ -35,8 +38,9 @@ export async function checkRole(request,response,next) {
         const role = await roleService.findById(roleId)
         const url = request.baseUrl
         const method = request.method
+        // console.log(url , method , role);
+        
         const permission = role[URL_ACCESS[method][url]]
-        console.log(permission);
         if (!permission) {
             return response.status(403).json(CommonException.NotEnoughPermission('permission denied!'))
         }

@@ -21,7 +21,6 @@ const UserSchema = new mongoose.Schema({
     },
     parentsNumber:{
         type: mongoose.SchemaTypes.Mixed,
-        unique:true,
         default:null
     },
     paretnsName:{

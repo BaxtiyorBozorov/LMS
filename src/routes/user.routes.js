@@ -13,8 +13,8 @@ import {authorization} from "../common/middleware/auth.js"
 import {checkRole} from "../common/middleware/auth-role.js"
 
 const routes = express.Router()
-// routes.use(authorization)
-// routes.use(checkRole)
+routes.use(authorization)
+routes.use(checkRole)
 
 routes.route("/" )
     .post(validateIt(UserSchemas.createUser) , createUserHandler)

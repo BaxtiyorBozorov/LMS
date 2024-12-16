@@ -1,3 +1,4 @@
+import { RoleModel } from "../common/db/models/role.model.js"
 import { CommonException } from "../common/exeption/index.js"
 import roleService from "../common/services/role.service.js"
 import userService from "../common/services/user.service.js"
@@ -38,8 +39,8 @@ export const deleteRoleHandler = async (req , res ) => {
         const {_id} = req.params
         const role = await roleService.findById(_id)
         if(!role) return res.status(404).json(CommonException.NotFound("Role not found"))
-        await roleService.deleteOne(role._id)
-        return res.status(200).json(CommonException.Success())
+        await RoleModel.deleteOne({_id})
+        return res.status(200).json(CommonException.Success("Role deleted successfully"))
     } catch (error) {
         return res.status(500).json(CommonException.Unknown(error.message))
     }

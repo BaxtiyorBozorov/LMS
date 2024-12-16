@@ -67,6 +67,10 @@ export const UserSchemas = {
                           'string.pattern.base': 'Tug‘ilgan sana dd-mm-yyyy formatida bo‘lishi kerak',
                           'any.required': 'Tug‘ilgan sana majburiy maydon',
                         }),
+                groupId: Joi.string()
+                                .hex()
+                                .length(24)
+                                .optional(),
                 parentsNumber: Joi.string()
                                 .pattern(/^(\+998|8\-9|998)?\s?(\d{2})?\-?\d{3}\-?\d{2}\-?\d{2}$/)
                                 .length(13),

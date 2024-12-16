@@ -4,7 +4,8 @@ import { addStudentToGroupHandler,
     deleteGroupHandleer, 
     getGroupHandler, 
     getGroupStudentsHandler, 
-    removeStudentFromGroupHandler } from "../handler/group.handler.js";
+    removeStudentFromGroupHandler, 
+    updateGroupHandler} from "../handler/group.handler.js";
 import { authorization } from "../common/middleware/auth.js";
 import { validateIt } from "../common/middleware/validate.js";
 import { addStudentToGroupSchema, groupSchema } from "../common/joi-schemas/group.schemas.js";
@@ -19,9 +20,11 @@ router.use(checkRole) // middleware for admin role
 router.route('/')
     .post(validateIt(groupSchema.create),createGroupHandler)
     .get(getGroupHandler)
+    .put(validateIt(groupSchema.update), updateGroupHandler)
 
 router.patch('/:groupId/students/:studentId',validateIt(addStudentToGroupSchema , 'params'),addStudentToGroupHandler)
 router.delete('/:groupId/students/:studentId',validateIt(addStudentToGroupSchema , 'params'),removeStudentFromGroupHandler)
 router.get('/:groupId/students',validateIt(baseSchemas.groupId , 'params'),getGroupStudentsHandler)
 router.delete('/:groupId',validateIt(baseSchemas.groupId , 'params'),deleteGroupHandleer)
+router.get('/:_id',validateIt(baseSchemas.byId , 'params'),)
 export default router
