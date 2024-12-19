@@ -11,5 +11,6 @@ export const COLLECTIONS = {
     SMS_MESSAGES: "sms_messges",
     OTP: "otps",
     ROLE: "roles",
+    LESSON: "lessons"
 
 }

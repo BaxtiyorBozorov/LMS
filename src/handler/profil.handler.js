@@ -2,6 +2,33 @@ import { CommonException } from "../common/exeption/index.js";
 import profilService from "../common/services/profil.service.js";
 import userService from "../common/services/user.service.js";
 import { dateParser } from "../common/utils/date.parser.js";
+import multer from "multer";
+import path from "path";
+
+// const upload = multer({ dest: 'uploads/' })
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Fayllar saqlanadigan papka
+    },
+    filename: (req, file, cb) => {
+      const uniqueName = `${Date.now()}-${file.originalname}`;
+      cb(null, uniqueName);
+    },
+  });
+
+  // Fayl turini tekshirish (faqat rasm)
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Yuklanadigan fayl faqat rasm bo‘lishi kerak!'), false);
+    }
+  };
+  
+  // Multer middleware
+  const upload = multer({ storage, fileFilter });
+
 
 export async function createProfilHandler(request , response) {
     try {

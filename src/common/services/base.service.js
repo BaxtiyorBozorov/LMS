@@ -63,6 +63,15 @@ export const BaseService = class BaseService {
             console.log(error.message)
         }
     }
+    async softDeleteOne(id){
+        try {
+            id = new Types.ObjectId(id)
+            return await this.model.deleteOne({_id: id})
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     async findOne(query , options ={}){
         try {

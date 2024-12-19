@@ -7,6 +7,7 @@ const URL_ACCESS = {
         "/admin/course" : "addCourse",
         "/admin/user" : "addUser",
         '/admin/role' : "addRole",
+        "/admin/lesson" : "addLesson",
 
     },
     PUT: {
@@ -14,18 +15,21 @@ const URL_ACCESS = {
         "/admin/course" : "updateCourse",
         "/admin/user" : "updateUser",
         "/admin/role" : "updateRole",
+        "/admin/lesson" : "updateLesson",
     },
     DELETE: {
         "/admin/group" : "deleteGroup",
         "/admin/course" : "deleteCourse",
         "/admin/user" : "deleteUser",
         "/admin/role" : "deleteRole",
+        "/admin/lesson" : "deleteLesson",
     },
     GET: {
         "/admin/role" : "getRole",
         "/admin/user" : "getUser",
         "/admin/group" : "getGroup",
         "/admin/course" : "getCourse",
+        "/admin/lesson" : "getLesson",
     },
     PATCH: {
         "/admin/group" : "updateUser",

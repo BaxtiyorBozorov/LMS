@@ -38,6 +38,23 @@ const roleSchema = new mongoose.Schema({
         type:Boolean ,
         default: false
     } ,
+    //lesson
+    addLesson:{
+        type:Boolean,
+        default:false
+    },
+    updateLesson:{
+        type:Boolean,
+        default:false
+    },
+    deleteLesson:{
+        type:Boolean,
+        default:false
+    },
+    getLesson:{
+        type:Boolean,
+        default:false
+    },
     //group
     addGroup:{
         type:Boolean,
